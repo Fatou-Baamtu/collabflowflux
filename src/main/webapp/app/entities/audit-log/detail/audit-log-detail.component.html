@@ -1,0 +1,54 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (auditLog(); as auditLogRef) {
+      <div>
+        <h2 data-cy="auditLogDetailsHeading"><span jhiTranslate="collabflowApp.auditLog.detail.title">Audit Log</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ auditLogRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="collabflowApp.auditLog.entity">Entity</span></dt>
+          <dd>
+            <span [jhiTranslate]="'collabflowApp.EntityEnum.' + (auditLogRef.entity ?? 'null')">{{
+              { null: '', PROJECT: 'PROJECT', TASK: 'TASK', SUB_TASK: 'SUB_TASK', COMMENT: 'COMMENT' }[auditLogRef.entity ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="collabflowApp.auditLog.action">Action</span></dt>
+          <dd>
+            <span [jhiTranslate]="'collabflowApp.ActionEnum.' + (auditLogRef.action ?? 'null')">{{
+              { null: '', CREATED: 'CREATED', UPDATED: 'UPDATED', DELETED: 'DELETED' }[auditLogRef.action ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="collabflowApp.auditLog.timestamp">Timestamp</span></dt>
+          <dd>
+            <span>{{ auditLogRef.timestamp | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="collabflowApp.auditLog.entityId">Entity Id</span></dt>
+          <dd>
+            <span>{{ auditLogRef.entityId }}</span>
+          </dd>
+          <dt><span jhiTranslate="collabflowApp.auditLog.user">User</span></dt>
+          <dd>
+            <span>{{ auditLogRef.user?.id }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Retour</span>
+        </button>
+
+        <button type="button" [routerLink]="['/audit-log', auditLogRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Editer</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

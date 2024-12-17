@@ -1,0 +1,64 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (task(); as taskRef) {
+      <div>
+        <h2 data-cy="taskDetailsHeading"><span jhiTranslate="collabflowApp.task.detail.title">Task</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ taskRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="collabflowApp.task.title">Title</span></dt>
+          <dd>
+            <span>{{ taskRef.title }}</span>
+          </dd>
+          <dt><span jhiTranslate="collabflowApp.task.description">Description</span></dt>
+          <dd>
+            <span>{{ taskRef.description }}</span>
+          </dd>
+          <dt><span jhiTranslate="collabflowApp.task.status">Status</span></dt>
+          <dd>
+            <span [jhiTranslate]="'collabflowApp.Status.' + (taskRef.status ?? 'null')">{{
+              { null: '', TODO: 'TODO', IN_PROGRESS: 'IN_PROGRESS', DONE: 'DONE' }[taskRef.status ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="collabflowApp.task.dueDate">Due Date</span></dt>
+          <dd>
+            <span>{{ taskRef.dueDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="collabflowApp.task.isCompleted">Is Completed</span></dt>
+          <dd>
+            <span>{{ taskRef.isCompleted }}</span>
+          </dd>
+          <dt><span jhiTranslate="collabflowApp.task.assignee">Assignee</span></dt>
+          <dd>
+            <span>{{ taskRef.assignee?.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="collabflowApp.task.project">Project</span></dt>
+          <dd>
+            @if (task()!.project) {
+              <div>
+                <a [routerLink]="['/project', task()!.project?.id, 'view']">{{ taskRef.project?.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Retour</span>
+        </button>
+
+        <button type="button" [routerLink]="['/task', taskRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Editer</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

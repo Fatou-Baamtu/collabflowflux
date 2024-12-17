@@ -1,0 +1,84 @@
+@pagination
+@dto(mapstruct)
+@service(serviceImpl)
+@filter
+entity Project {
+  name String required,
+  description String,
+  priority Priority required, // Enum
+  startDate Instant,
+  endDate Instant
+}
+@dto(mapstruct)
+@service(serviceImpl)
+@filter
+entity Task {
+  title String required,
+  description String,
+  status Status required, // Enum
+  dueDate Instant,
+  isCompleted Boolean
+}
+@pagination
+@dto(mapstruct)
+@service(serviceImpl)
+@filter
+entity SubTask {
+  title String required,
+  description String,
+  status Status required, // Enum
+  dueDate Instant
+}
+@pagination
+@dto(mapstruct)
+@service(serviceImpl)
+entity Comment {
+  content TextBlob required,
+  createdAt Instant required
+}
+@pagination
+@dto(mapstruct)
+@service(serviceImpl)
+entity AuditLog {
+  entity EntityEnum required, // Enum
+  action ActionEnum required, // Enum
+  timestamp Instant required,
+  entityId Long required
+}
+
+relationship ManyToOne {
+  AuditLog{user} to User with builtInEntity,
+  Task{assignee} to User with builtInEntity,
+  SubTask{assignee} to User with builtInEntity
+}
+
+relationship OneToMany {
+  Project{tasks} to Task,
+  Task{subTasks} to SubTask,
+  Task{comments} to Comment
+}
+
+enum Priority {
+  URGENT,
+  NORMAL,
+  LOW
+}
+
+enum Status {
+  TODO,
+  IN_PROGRESS,
+  DONE
+}
+
+enum EntityEnum {
+  PROJECT,
+  TASK,
+  SUB_TASK,
+  COMMENT
+}
+
+enum ActionEnum {
+  CREATED,
+  UPDATED,
+  DELETED
+}

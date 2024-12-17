@@ -1,0 +1,10 @@
+{
+  "collabflowApp": {
+    "ActionEnum": {
+      "null": "",
+      "CREATED": "CREATED",
+      "UPDATED": "UPDATED",
+      "DELETED": "DELETED"
+    }
+  }
+}

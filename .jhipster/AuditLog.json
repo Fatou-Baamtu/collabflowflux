@@ -1,0 +1,44 @@
+{
+  "annotations": {
+    "changelogDate": "20241217190628",
+    "dto": "mapstruct",
+    "pagination": true,
+    "service": "serviceImpl"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "entity",
+      "fieldType": "EntityEnum",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "PROJECT,TASK,SUB_TASK,COMMENT"
+    },
+    {
+      "fieldName": "action",
+      "fieldType": "ActionEnum",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "CREATED,UPDATED,DELETED"
+    },
+    {
+      "fieldName": "timestamp",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "entityId",
+      "fieldType": "Long",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "name": "AuditLog",
+  "relationships": [
+    {
+      "otherEntityName": "user",
+      "relationshipName": "user",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one",
+      "relationshipWithBuiltInEntity": true
+    }
+  ],
+  "searchEngine": "no"
+}

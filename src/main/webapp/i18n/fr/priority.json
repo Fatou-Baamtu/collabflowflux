@@ -1,0 +1,10 @@
+{
+  "collabflowApp": {
+    "Priority": {
+      "null": "",
+      "URGENT": "URGENT",
+      "NORMAL": "NORMAL",
+      "LOW": "LOW"
+    }
+  }
+}

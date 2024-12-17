@@ -1,0 +1,42 @@
+{
+  "annotations": {
+    "changelogDate": "20241217190626",
+    "dto": "mapstruct",
+    "filter": true,
+    "pagination": true,
+    "service": "serviceImpl"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "title",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "Status",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "TODO,IN_PROGRESS,DONE"
+    },
+    {
+      "fieldName": "dueDate",
+      "fieldType": "Instant"
+    }
+  ],
+  "name": "SubTask",
+  "relationships": [
+    {
+      "otherEntityName": "user",
+      "relationshipName": "assignee",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one",
+      "relationshipWithBuiltInEntity": true
+    }
+  ],
+  "searchEngine": "no"
+}
