@@ -1,5 +1,6 @@
 package com.collabflow.web.rest;
 
+import com.collabflow.config.AuthoritiesConstants;
 import com.collabflow.repository.ProjectRepository;
 import com.collabflow.service.ProjectService;
 import com.collabflow.service.dto.ProjectDTO;
@@ -19,6 +20,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.server.reactive.ServerHttpRequest;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.util.ForwardedHeaderUtils;
@@ -57,6 +59,8 @@ public class ProjectResource {
      * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new projectDTO, or with status {@code 400 (Bad Request)} if the project has already an ID.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
+    // Route accessible uniquement par un administrateur ou un chef de projet
+    @PreAuthorize("hasAuthority('" + AuthoritiesConstants.ADMIN + "') or hasAuthority('" + AuthoritiesConstants.PROJECT_MANAGER + "')")
     @PostMapping("")
     public Mono<ResponseEntity<ProjectDTO>> createProject(@Valid @RequestBody ProjectDTO projectDTO) throws URISyntaxException {
         LOG.debug("REST request to save Project : {}", projectDTO);

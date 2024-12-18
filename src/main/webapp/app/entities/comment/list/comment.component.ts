@@ -47,6 +47,7 @@ export class CommentComponent implements OnInit {
   protected ngZone = inject(NgZone);
 
   trackId = (item: IComment): number => this.commentService.getCommentIdentifier(item);
+  itemsPerPage: number = 10;
 
   ngOnInit(): void {
     this.subscription = combineLatest([this.activatedRoute.queryParamMap, this.activatedRoute.data])

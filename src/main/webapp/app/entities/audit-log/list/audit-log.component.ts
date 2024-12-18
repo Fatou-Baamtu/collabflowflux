@@ -44,6 +44,7 @@ export class AuditLogComponent implements OnInit {
   protected ngZone = inject(NgZone);
 
   trackId = (item: IAuditLog): number => this.auditLogService.getAuditLogIdentifier(item);
+  itemsPerPage: number = 10;
 
   ngOnInit(): void {
     this.subscription = combineLatest([this.activatedRoute.queryParamMap, this.activatedRoute.data])

@@ -1,7 +1,9 @@
 package com.collabflow.domain;
 
 import com.collabflow.domain.enumeration.Priority;
+import com.collabflow.service.AuditListener;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import jakarta.persistence.EntityListeners;
 import jakarta.validation.constraints.*;
 import java.io.Serializable;
 import java.time.Instant;
@@ -16,6 +18,7 @@ import org.springframework.data.relational.core.mapping.Table;
  */
 @Table("project")
 @SuppressWarnings("common-java:DuplicatedBlocks")
+@EntityListeners(AuditListener.class)
 public class Project implements Serializable {
 
     private static final long serialVersionUID = 1L;

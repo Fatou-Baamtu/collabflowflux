@@ -44,6 +44,7 @@ export class SubTaskComponent implements OnInit {
   protected ngZone = inject(NgZone);
 
   trackId = (item: ISubTask): number => this.subTaskService.getSubTaskIdentifier(item);
+  itemsPerPage: number = 10;
 
   ngOnInit(): void {
     this.subscription = combineLatest([this.activatedRoute.queryParamMap, this.activatedRoute.data])
